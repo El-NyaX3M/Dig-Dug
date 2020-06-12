@@ -1,3 +1,3 @@
 ﻿  Grind.cpp
-C:\Users\nglrp\OneDrive\Escritorio\Programación\Programation 1\Dig Dug\main\Grind.h(3,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+C:\Users\nglrp\OneDrive\Escritorio\Programación\Programation 1\Dig Dug\main\Grind.cpp(20,15): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
   main.vcxproj -> C:\Users\nglrp\OneDrive\Escritorio\Programación\Programation 1\Dig Dug\Debug\main.exe

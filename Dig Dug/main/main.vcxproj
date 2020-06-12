@@ -151,17 +151,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Grind.cpp" />
-    <ClCompile Include="Level_1.cpp" />
+    <ClCompile Include="Kougeki.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Pooka.cpp" />
+    <ClCompile Include="Rock.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Attack.h" />
     <ClInclude Include="Grind.h" />
+    <ClInclude Include="Kougeki.h" />
     <ClInclude Include="Level_1.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Pooka.h" />
+    <ClInclude Include="Rock.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="disparo_lazer.wav" />
+    <Media Include="explosion_bajo_agua.wav" />
+    <Media Include="gameover.wav" />
+    <Media Include="sonido_menu.wav" />
+    <Media Include="victoria.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,10 +24,16 @@
     <ClCompile Include="Pooka.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Level_1.cpp">
+    <ClCompile Include="Grind.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Grind.cpp">
+    <ClCompile Include="Rock.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Kougeki.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,5 +50,31 @@
     <ClInclude Include="Grind.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Rock.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Kougeki.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="explosion_bajo_agua.wav">
+      <Filter>Archivos de recursos</Filter>
+    </Media>
+    <Media Include="gameover.wav">
+      <Filter>Archivos de recursos</Filter>
+    </Media>
+    <Media Include="sonido_menu.wav">
+      <Filter>Archivos de recursos</Filter>
+    </Media>
+    <Media Include="victoria.wav">
+      <Filter>Archivos de recursos</Filter>
+    </Media>
+    <Media Include="disparo_lazer.wav">
+      <Filter>Archivos de recursos</Filter>
+    </Media>
   </ItemGroup>
 </Project>

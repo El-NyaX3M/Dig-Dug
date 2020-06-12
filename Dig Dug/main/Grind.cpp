@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
+#include <time.h>
 using namespace std;
 
 void gotoxyg(int x, int y) {
@@ -16,15 +17,16 @@ void gotoxyg(int x, int y) {
     SetConsoleCursorPosition(hCon, dwPos);
 }
 Grind::Grind() {
+    srand(time(NULL));
     for (int y = 0; y < 29; y++) {
         for (int x = 0; x < 57; x++) {
             if (y < 2) grind[x][y] = 0;
             else grind[x][y] = 1;
         }
     }
-    
 }
 void Grind::map() {
+    gotoxyg(0, 0); printf("Lv. %d", level);
     gotoxyg(8, 0); cout << "SCOWORE: ";
     gotoxyg(40, 0); cout << "LIVEWES: ";
     gotoxyg(1, 3);
@@ -52,11 +54,68 @@ void Grind::map() {
 }
 void Grind::start() {
     map();
+    enemiesL = enemies;
     dig.spr(grind, 77);
-	dig.startAnim(grind);
-	dig.spr(grind, 75);
+    dig.startAnim(grind);
+    dig.spr(grind, 75);
+    for (int a = 0; a < rocks; a++) {
+        Rock r;
+        r.setr();
+        rock[a] = r;
+        rock[a].spr(grind);
+    }
+    for (int a = 0; a < enemies; a++) {
+        Pooka p;
+        p.setr(spd);
+        pooka[a] = p;
+        rock[a].spr(grind);
+    }
 }
 
-void Grind::play() {
-	dig.mve(grind);
+bool Grind::play() {
+    bool check = false;
+    if (lives == 0) return true;
+    gotoxyg(17, 0); printf("%d", score);
+    gotoxyg(49, 0); printf("%d", lives);
+    
+    for (int a = 0; a < rocks; a++) {
+        rock[a].check(grind);
+    }       
+    for (int a = 0; a < enemies; a++) {
+        int shelp = score;
+        score += pooka[a].check(grind);
+        if (shelp != score) enemiesL--;
+    }
+    check = dig.die(grind);
+    if (check == true) {
+        lives--;
+        dig.danim();
+        restart();
+    }
+    if (enemiesL == 0) nextlevel();
+    return false;
+}
+
+void Grind::restart() {
+    for (int a = 0; a < enemies; a++) {
+        pooka[a].restart(grind);   
+    }
+    dig.restart(grind);
+}
+
+void Grind::nextlevel() {
+    level++;
+    for (int y = 0; y < 29; y++) {
+        for (int x = 0; x < 57; x++) {
+            if (y < 2) grind[x][y] = 0;
+            else grind[x][y] = 1;
+        }
+    }
+    if (spd > 2) spd--;
+    map();
+    enemies++;
+    if (level % 2 == 1) rocks++;
+    dig.setxy();
+    start();
+
 }

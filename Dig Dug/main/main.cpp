@@ -1,7 +1,10 @@
 ﻿#include <iostream>
 #include <stdio.h>
 #include <conio.h>
+#include <thread>
 #include <windows.h>
+#include <time.h>
+#include <mmsystem.h>
 #include "Player.h"
 #include "Grind.h"
 
@@ -60,8 +63,9 @@ int cursor() {
     int select = 0, x = 1;
     printf("\033[0;36m");
     gotoxy(15, 10 + (x * 3)); printf("*>");
-    while (select == 0) {
+    while (select == 0) {    
         if (_kbhit()) {
+
             char key = _getch();
             gotoxy(15, 10 + (x*3)); printf("  ");
             if (key == 13) {
@@ -79,12 +83,67 @@ int cursor() {
 }
     //Help: Es el menu de como jugar
 int help() {
+    for (int y = 12; y < 29; y++) {
+        for (int x = 0; x < 56; x++) {
+            gotoxy(x, y); cout << " ";
+        }
+    }
+    printf("\x1b[32m");
+    gotoxy(14, 15); cout << "Movement";
+    gotoxy(35, 15); cout << "Shooting";
+    //flecha arriba
+    gotoxy(15, 17); printf("%c %c %c", 91, 94, 93);
+    gotoxy(15, 18); printf("%c %c %c", 91, 124, 93);
+    //flecha abajo
+    gotoxy(15, 20); printf("%c %c %c", 91, 124, 93);
+    gotoxy(15, 21); printf("%c %c %c", 91, 118, 93);
+    //flecha izquierda
+    gotoxy(9, 19); printf("%c %c%c %c", 91, 60, 61, 93);
+    //flecha derecha
+    gotoxy(20, 19); printf("%c %c%c %c", 91, 61, 62, 93);
+    //disparo el numero del centro lo puedes cambiar porque no se que boton de disaparon vayas a usar
+    gotoxy(36, 18); printf("%c %c %c", 91, 88, 93);
+
+    gotoxy(8, 25); cout << "*Press a button to go back to the menu*";
+    _getch();
+    for (int y = 12; y < 29; y++) {
+        for (int x = 0; x < 56; x++) {
+            gotoxy(x, y); cout << " ";
+        }
+    }
     return 0;
 }
     //Credits: El menu de los creditos y la informacion necesaria
 int credits() {
+    for (int y = 12; y < 29; y++) {
+        for (int x = 0; x < 56; x++) {
+            gotoxy(x, y); cout << " ";
+        }
+    }
+    printf("\x1b[34m");
+
+    gotoxy(10, 13); cout << "Universidad Autonoma de Baja California Sur";
+    gotoxy(11, 14); cout << "Departamento de Sistemas Computacionales";
+    gotoxy(26, 15); cout << "(DASC)";
+
+    printf("\x1b[32m");
+    gotoxy(23, 17); cout << "Dig Dug Team";
+    gotoxy(13, 18); printf("Niggel Alexis Altamirano Hern%cndez", 164);
+    gotoxy(13, 19); printf("Cristofer Santana Escare%co Higuera", 160);
+    printf("\x1b[36m");
+    gotoxy(20, 21); cout << "Profesor in charge";
+    gotoxy(18, 22); printf("Lic Jonathan Soto Mu%coz", 164);
+    gotoxy(11, 24); cout << "*Press a button to go back to the menu*";
+    gotoxy(0, 0);
+    _getch();
+    for (int y = 12; y < 29; y++) {
+        for (int x = 0; x < 56; x++) {
+            gotoxy(x, y); cout << " ";
+        }
+    }
     return 0;
 }
+
     //Menu: Es el menu principal
 void menu() {
     int select = 0;
@@ -108,38 +167,48 @@ void menu() {
             gotoxy(18, 13); printf("Start Diggin'");
             printf("\033[0;36m");
             Sleep(150);
+            system("cls");
             break;
         case 2:
             printf("\033[0;36m");
             gotoxy(18, 16); printf("How To Dig");
             Sleep(150);
+
             help();
             break;
         case 3:
             printf("\033[0;36m");
             gotoxy(18, 19); printf("Digger Credits");
             Sleep(150);
+            for (int y = 12; y < 29; y++) {
+                for (int x = 0; x < 56; x++) {
+                    cout << " ";
+                }
+            }
+            credits();
             break;
         }
     }
 }
 
-
 //THE GAME
     //Main: Aqui es donde el codigo se compila
 int main()
 {
-    Grind game;
-    HideCursor();
-    bool gameOver = false;
-    Player dig();
-    menu();
-    game.start();
-    while (!gameOver) {
-        
-        game.play();
-        Sleep(30);
-    }
+    do {
+        srand(time(NULL));
+        Grind game;
+        HideCursor();
+        bool gameOver = false;
+        menu();
+        game.start();
+        do {
+            gameOver = game.play();
+            Sleep(30);
+        } while (!gameOver);
+        system("cls");
+    } while (true);
+    
 }
 //-------
 
